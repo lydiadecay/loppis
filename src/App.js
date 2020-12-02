@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+import {BasketContext} from "./context/BasketContext";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Loppis from "./components/Loppis";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Checkout from "./components/Checkout";
+import Account from "./components/Account";
+import InsideStore from "./components/InsideStore";
 
 function App() {
+  const authContext = useContext(AuthContext);
+  const basketContext = useContext(BasketContext);
+
+  console.log(authContext);
+  console.log(basketContext);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Route exact path="/" component={Loppis} />
+      <Route path="/account" component={Account} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/checkout" component={Checkout} />
+      <Route path="/insidestore/:id" component={InsideStore} />
+    </Router>
   );
 }
 
